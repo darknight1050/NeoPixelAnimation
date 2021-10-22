@@ -4,13 +4,14 @@
  
 class Animation {
 private:
+    uint32_t tickDelay;
     uint32_t currentTick;
     Display* display;
 protected:
     Color* pixels;
     virtual void animateTick() = 0;
 public:
-    Animation(Display* display, uint32_t startTick = 0);
+    Animation(Display* display, uint32_t tickDelay = 0, uint32_t startTick = 0);
     void runTick();
     uint32_t getCurrentTick() const { return currentTick; }
     Display* getDisplay() const { return display; }
