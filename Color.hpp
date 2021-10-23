@@ -43,6 +43,11 @@ public:
         color &= 0x00FFFFFF;
         color |= ((uint32_t)w << 24);
     }
+
+    void changeBrightness(uint8_t brightness) {
+        float factor = 255.0/brightness;
+        color = ((uint32_t)(getW()/factor) << 24) | ((uint32_t)(getR()/factor) << 16) | ((uint32_t)(getG()/factor) << 8) | (uint32_t)(getB()/factor);
+    }
     
     operator uint32_t() const { return color; }
     
