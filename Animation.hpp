@@ -13,7 +13,12 @@ protected:
     virtual void animateTick() = 0;
 public:
     Animation(Display* display_, uint8_t brightness_ = 255, uint32_t tickDelay_ = 1, uint32_t startTick_ = 0) 
-        : display(display_), brightness(brightness_), tickDelay(tickDelay_), currentTick(startTick_), pixels(new Color[display->getPixelCount()]) { }
+        : display(display_), brightness(brightness_), tickDelay(tickDelay_), currentTick(startTick_) {
+        pixels = new Color[display->getPixelCount()];
+    }
+    ~Animation() {
+        delete[] pixels;
+    }
     void runTick();
     Display* getDisplay() const { return display; }
     uint8_t getBrightness() const { return brightness; }
