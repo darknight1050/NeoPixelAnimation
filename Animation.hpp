@@ -12,7 +12,8 @@ protected:
     Color* pixels;
     virtual void animateTick() = 0;
 public:
-    Animation(Display* display, uint8_t brightness_ = 255, uint32_t tickDelay = 1, uint32_t startTick = 0);
+    Animation(Display* display_, uint8_t brightness_ = 255, uint32_t tickDelay_ = 1, uint32_t startTick_ = 0) 
+        : display(display_), brightness(brightness_), tickDelay(tickDelay_), currentTick(startTick_), pixels(new Color[display->getPixelCount()]) { }
     void runTick();
     Display* getDisplay() const { return display; }
     uint8_t getBrightness() const { return brightness; }

@@ -4,9 +4,9 @@
  
 class Display {
 private:
-    uint16_t pixelCount;
+    const uint16_t pixelCount;
 public:
-    Display(uint16_t pixelCount);
+    Display(uint16_t pixelCount_) : pixelCount(pixelCount_) {}
 
     uint16_t getPixelCount() const { return pixelCount; }
     

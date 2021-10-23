@@ -6,17 +6,11 @@ private:
     uint32_t color;
 
 public:
-    Color() {
-        color = 0;
-    }
+    Color() : color(0) { }
     
-    Color(uint32_t color_) {
-        color = color_;
-    }
+    Color(uint32_t color_) : color(color_) { }
     
-    Color(uint8_t r, uint8_t g, uint8_t b, uint8_t w = 0) {
-        color = ((uint32_t)w << 24) | ((uint32_t)r << 16) | ((uint32_t)g << 8) | b;
-    }
+    Color(uint8_t r, uint8_t g, uint8_t b, uint8_t w = 0) : color(((uint32_t)w << 24) | ((uint32_t)r << 16) | ((uint32_t)g << 8) | b) { }
     
     uint8_t getR() const { return (uint8_t)(color >> 16); }
 
