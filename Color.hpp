@@ -21,8 +21,10 @@ public:
     uint8_t getW() const { return (uint8_t)(color >> 24); }
 
     void setR(uint8_t r) {
-        color &= 0xFF00FFFF; color |= ((uint32_t)r << 16); }
-
+        color &= 0xFF00FFFF; 
+        color |= ((uint32_t)r << 16);
+    }
+    
     void setG(uint8_t g) {
         color &= 0xFFFF00FF;
         color |= ((uint32_t)g << 8);
@@ -38,9 +40,14 @@ public:
         color |= ((uint32_t)w << 24);
     }
 
-    Color& changeBrightness(uint8_t brightness) {
-        float factor = 255.0/brightness;
-        color = ((uint32_t)(getW()/factor) << 24) | ((uint32_t)(getR()/factor) << 16) | ((uint32_t)(getG()/factor) << 8) | (uint32_t)(getB()/factor);
+    Color& changeRGBBrightness(uint8_t brightness) {
+        uint8_t maxChannel = max(getR(), max(getG(), getB()));
+        float factor;
+        if(maxChannel > brightness)
+          factor = (float)maxChannel/(float)brightness;
+        else
+          factor = (float)1/(float)brightness*(float)maxChannel;
+        color = (getW() << 24) | ((uint32_t)(getR()/factor) << 16) | ((uint32_t)(getG()/factor) << 8) | (uint32_t)(getB()/factor);
         return *this;
     }
     
